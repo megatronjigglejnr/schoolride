@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SchoolRide</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#F5B82E">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SchoolRide">
+<meta name="format-detection" content="telephone=no">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <symbol id="bus" viewBox="0 0 132 60">
+    <path fill="currentColor" d="M4 8Q4 2 10 2H92Q97 2 100 7L106 22H120Q128 22 128 30V46Q128 50 124 50H8Q4 50 4 46Z"/>
+    <g style="fill:var(--bus-win,var(--canvas))">
+      <rect x="12" y="9" width="15" height="14" rx="3"/><rect x="31" y="9" width="15" height="14" rx="3"/>
+      <rect x="50" y="9" width="15" height="14" rx="3"/><rect x="69" y="9" width="15" height="14" rx="3"/>
+      <path d="M88 9H93Q95 9 96 11L100.5 22H88Z"/>
+      <rect x="4" y="33" width="124" height="3"/><circle cx="122" cy="39" r="2.4"/>
+    </g>
+    <g fill="currentColor" style="stroke:var(--bus-win,var(--canvas))" stroke-width="2.5"><circle cx="30" cy="50" r="8.5"/><circle cx="100" cy="50" r="8.5"/></g>
+    <g style="fill:var(--bus-win,var(--canvas))"><circle cx="30" cy="50" r="3"/><circle cx="100" cy="50" r="3"/></g>
+  </symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
+    <symbol id="i-icon-3" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.6"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2 21a7 7 0 0 1 14 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7"/><path d="M18.5 14.5A7 7 0 0 1 22 21"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></symbol>
+    <symbol id="i-smile" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+</defs></svg>
+
+<div class="app-root">
+  <div class="screen">
+
+    <!-- START-UP: the bus on marigold, then it pulls away and the field fades into the first screen -->
+    <div class="intro" id="intro" aria-hidden="true">
+      <div class="intro-stage">
+        <div class="intro-busbox">
+          <span class="intro-puff p1"></span><span class="intro-puff p2"></span><span class="intro-puff p3"></span><span class="intro-puff p4"></span>
+          <div class="intro-car">
+            <span class="intro-lines"><span></span><span></span><span></span></span>
+            <svg class="intro-bus" viewBox="0 0 132 60"><use href="#bus"/></svg>
+          </div>
+        </div>
+        <div class="intro-word">SchoolRide</div>
+      </div>
+    </div>
+
+    <!-- ONBOARDING -->
+    <div class="onboard-flow welcome-mode" id="onboardFlow">
+
+      <div class="onboard-step active" id="ob-welcome">
+        <div class="onboard-center">
+          <svg class="welcome-bus" viewBox="0 0 132 60" aria-hidden="true"><use href="#bus"/></svg>
+          <div class="onboard-title welcome-word">SchoolRide</div>
+          <div class="onboard-sub">See your child's ride, live — the moment it matters.</div>
+        </div>
+        <button type="button" class="btn-primary dark" onclick="obGoTo('verify')">Get started</button>
+        <button type="button" class="demo-link" onclick="obSkip()">Skip onboarding (demo)</button>
+      </div>
+
+      <div class="onboard-step" id="ob-verify">
+        <div class="onboard-header">
+          <div class="onboard-title">Let's find your child's link</div>
+          <div class="onboard-sub">Enter the phone number you gave the school when your child was enrolled.</div>
+        </div>
+        <form class="ob-form" id="obPhoneForm" novalidate onsubmit="event.preventDefault(); obSubmitPhone()">
+          <div class="field" style="margin-top:18px;">
+            <label for="obPhone">Phone number</label>
+            <input type="tel" id="obPhone" autocomplete="tel" inputmode="tel" placeholder="+27 82 555 0142" aria-describedby="obPhoneErr">
+            <div class="field-error" id="obPhoneErr" role="alert"></div>
+          </div>
+          <div class="onboard-spacer"></div>
+          <p class="ob-terms">By continuing, you agree to the <button type="button" class="inline-link" onclick="obGoTo('terms')">Terms &amp; conditions</button>.</p>
+          <button type="submit" class="btn-primary">Send code</button>
+        </form>
+      </div>
+
+      <div class="onboard-step" id="ob-terms">
+        <div class="ob-terms-bar">
+          <button type="button" class="back-btn ob-back" aria-label="Back" onclick="obGoTo('verify')">
+            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <h2 class="ob-terms-title">Terms &amp; conditions</h2>
+        </div>
+        <div class="ob-terms-body" id="obTermsBody"></div>
+      </div>
+
+      <div class="onboard-step" id="ob-otp">
+        <div class="onboard-header">
+          <div class="onboard-title">Enter the code</div>
+          <div class="onboard-sub">We sent a 6-digit code to <span id="obPhoneEcho">your number</span>. <span>(demo code: 123456)</span></div>
+          <button type="button" class="inline-link ob-change" onclick="obChangeNumber()">Change number</button>
+        </div>
+        <div class="otp-stage">
+          <div class="otp-row" id="otpRow">
+            <div class="otp-box"><input maxlength="1" inputmode="numeric" pattern="[0-9]*" aria-label="Digit 1" autocomplete="one-time-code"><svg class="otp-ring" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><rect x="2.6" y="2.6" width="94.8" height="94.8" rx="23"/></svg></div>
+            <div class="otp-box"><input maxlength="1" inputmode="numeric" pattern="[0-9]*" aria-label="Digit 2" autocomplete="off"><svg class="otp-ring" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><rect x="2.6" y="2.6" width="94.8" height="94.8" rx="23"/></svg></div>
+            <div class="otp-box"><input maxlength="1" inputmode="numeric" pattern="[0-9]*" aria-label="Digit 3" autocomplete="off"><svg class="otp-ring" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><rect x="2.6" y="2.6" width="94.8" height="94.8" rx="23"/></svg></div>
+            <div class="otp-box"><input maxlength="1" inputmode="numeric" pattern="[0-9]*" aria-label="Digit 4" autocomplete="off"><svg class="otp-ring" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><rect x="2.6" y="2.6" width="94.8" height="94.8" rx="23"/></svg></div>
+            <div class="otp-box"><input maxlength="1" inputmode="numeric" pattern="[0-9]*" aria-label="Digit 5" autocomplete="off"><svg class="otp-ring" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><rect x="2.6" y="2.6" width="94.8" height="94.8" rx="23"/></svg></div>
+            <div class="otp-box"><input maxlength="1" inputmode="numeric" pattern="[0-9]*" aria-label="Digit 6" autocomplete="off"><svg class="otp-ring" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><rect x="2.6" y="2.6" width="94.8" height="94.8" rx="23"/></svg></div>
+          </div>
+          <div class="otp-success" id="otpSuccess">
+            <svg class="otp-check" viewBox="0 0 52 52">
+              <path class="otp-check-mark" fill="none" d="M14 27l7 7 16-16"/>
+            </svg>
+          </div>
+        </div>
+        <div class="otp-error" id="otpError" role="alert"></div>
+        <button type="button" class="demo-link" id="otpResend" style="margin-top:6px;" onclick="showToast('Code resent')">Resend code</button>
+        <div class="onboard-spacer"></div>
+      </div>
+
+      <div class="onboard-step" id="ob-confirm">
+        <div class="onboard-header">
+          <div class="onboard-title">You're linked to</div>
+          <div class="onboard-sub">Confirmed by each child's school — no setup needed on your end.</div>
+        </div>
+        <div class="onboard-child-row">
+          <div class="contact-avatar">J</div>
+          <div class="onboard-child-info"><div class="contact-name">Jane Doe</div><div class="contact-role">Riverside Primary</div></div>
+          <div class="verified-badge">✓ Verified</div>
+        </div>
+        <div class="onboard-child-row">
+          <div class="contact-avatar muted">L</div>
+          <div class="onboard-child-info"><div class="contact-name">Liam Doe</div><div class="contact-role">Northgate Academy</div></div>
+          <div class="verified-badge">✓ Verified</div>
+        </div>
+        <div class="onboard-spacer"></div>
+        <button type="button" class="btn-primary" onclick="obGoTo('permission')">Continue</button>
+      </div>
+
+      <div class="onboard-step" id="ob-permission">
+        <div class="onboard-center">
+          <div class="onboard-mark"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-bell"/></svg></div>
+          <div class="onboard-title">Stay ahead of pickup time</div>
+          <div class="onboard-sub">Get notified when the ride is close, when your child is dropped off, and if an exam day changes the schedule.</div>
+        </div>
+        <button type="button" class="btn-primary" onclick="obEnableNotifs()">Enable notifications</button>
+        <button type="button" class="demo-link" onclick="obFinish()">Not now</button>
+      </div>
+
+    </div>
+
+    <div class="topnav glass" id="mainTopnav" data-tab="track">
+      <div class="topnav-row">
+        <button type="button" class="avatar-btn pic" data-pic="me" id="accountBtn" aria-label="Account, Sarah Doe" onclick="switchTab('profile')"><span class="pic-initials" aria-hidden="true">SD</span></button>
+        <button type="button" class="back-btn" id="backBtn" aria-label="Back" onclick="goBack()">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <p class="greeting"><span id="greetLine">Good afternoon,</span> <span class="greet-name">Sarah</span></p>
+        <h1 id="pageTitle">Jane's ride</h1>
+        <button type="button" class="bell-btn" id="bellBtn" aria-label="Notifications" onclick="openNotifications()">
+          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-bell"/></svg>
+          <span class="bell-badge" id="bellBadge"></span>
+        </button>
+      </div>
+      <div class="child-switch" id="trackSwitch" role="group" aria-label="Choose child">
+        <button type="button" class="child-pill active" aria-pressed="true" onclick="setActiveChild('jane')">Jane</button>
+        <button type="button" class="child-pill" aria-pressed="false" onclick="setActiveChild('liam')">Liam</button>
+      </div>
+    </div>
+
+    <div class="content" id="mainContent">
+
+      <!-- TRACK -->
+      <div class="tabscreen active" id="tab-track">
+        <section class="hero" id="statusCard">
+          <div id="statusCardBody"></div>
+        </section>
+        <section class="route-sheet">
+          <div class="bus" id="trackBus" aria-hidden="true"><svg viewBox="0 0 132 60"><use href="#bus"/></svg></div>
+          <div class="route-head"><h3>Today's route</h3><span id="trackProgress">Stop 3 of 5</span></div>
+          <ol class="stops" id="trackLine"></ol>
+          <div class="driver-card">
+            <button type="button" class="driver-left" id="trackMoreBtn" onclick="openSheet('call')" aria-label="All contacts for Jane">
+              <span class="driver-avatar" id="trackDriverAvatar">N</span>
+              <span class="driver-text"><span class="driver-name" id="trackDriverName">Mr. Naidoo</span><span class="driver-role" id="trackDriverRole">Driving Route 4</span></span>
+              <svg class="driver-more" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.4" aria-hidden="true"><use href="#i-chevron-right"/></svg>
+            </button>
+            <a class="call-btn" id="trackCallBtn" href="tel:+27825550104" data-name="Mr. Naidoo" aria-label="Call Mr. Naidoo" onclick="placeCall(event)">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><use href="#i-phone"/></svg>
+            </a>
+          </div>
+          <div class="route-head dist-head"><h3>Distance from home</h3><span>Approx.</span></div>
+          <div class="map-panel">
+            <button type="button" class="map-card" id="mapCard" onclick="openRouteView()" aria-label="Open the live map">
+              <span class="map-canvas" id="miniMap"></span>
+              <span class="map-live" id="mapLive"><i class="live-dot"></i><span id="mapLiveText">Live</span></span>
+              <span class="map-expand" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg></span>
+            </button>
+            <ul class="dist-list" id="distList" aria-label="Each child's distance from home"></ul>
+          </div>
+          <button type="button" class="demo-link" id="signalDemoLink" onclick="toggleSignalDemo()">Simulate signal loss (demo control)</button>
+        </section>
+      </div>
+
+      <!-- SCHEDULE (calendar) -->
+      <div class="tabscreen" id="tab-schedule">
+        <h2 class="page-title">Schedule</h2>
+        <div class="cal-card">
+        <div class="cal-header">
+          <button type="button" class="cal-nav-btn" aria-label="Previous month" onclick="calShiftMonth(-1)">
+            <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <div class="cal-month-label" id="calMonthLabel">September 2026</div>
+          <button type="button" class="cal-nav-btn" aria-label="Next month" onclick="calShiftMonth(1)">
+            <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+
+        <div class="cal-weekdays">
+          <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+        </div>
+
+        <div class="cal-detail" id="calDetail"></div>
+      </div>
+
+      <!-- HISTORY (placeholder) -->
+      <div class="tabscreen" id="tab-history">
+        <h2 class="page-title">History</h2>
+        <div id="historyList"></div>
+      </div>
+
+      <!-- PROFILE -->
+      <div class="tabscreen" id="tab-profile">
+        <div class="subview active" id="sub-account">
+          <h2 class="page-title">Account</h2>
+          <div class="profile-row">
+            <button type="button" class="profile-avatar pic" data-pic="me" aria-label="Change profile photo" onclick="openPhotoSheet('me')">
+              <span class="pic-initials" aria-hidden="true">SD</span>
+              <span class="pic-edit" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><use href="#i-camera"/></svg></span>
+            </button>
+            <div><div class="profile-name js-name">Sarah Doe</div><div class="profile-phone js-phone">+27 82 555 0142</div></div>
+          </div>
+          <div class="section-label">Your account</div>
+          <div class="row-list">
+            <button type="button" class="row-item" onclick="goToPersonal()">
+              <span class="row-icon"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-user"/></svg></span>
+              <span class="row-label">Personal info</span>
+              <svg aria-hidden="true" class="row-chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-chevron-right"/></svg>
+            </button>
+            <button type="button" class="row-item" onclick="goToFamily()">
+              <span class="row-icon"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-users"/></svg></span>
+              <span class="row-label">Family</span>
+              <svg aria-hidden="true" class="row-chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-chevron-right"/></svg>
+            </button>
+            <button type="button" class="row-item" onclick="goToPrivacy()">
+              <span class="row-icon"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-eye"/></svg></span>
+              <span class="row-label">Privacy</span>
+              <svg aria-hidden="true" class="row-chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-chevron-right"/></svg>
+            </button>
+            <button type="button" class="row-item" onclick="goToSecurity()">
+              <span class="row-icon"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-shield"/></svg></span>
+              <span class="row-label">Login &amp; security</span>
+              <svg aria-hidden="true" class="row-chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-chevron-right"/></svg>
+            </button>
+            <div class="row-item">
+              <span class="row-icon"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span>
+              <span class="row-label">Payment</span>
+              <span class="row-soon">Soon</span>
+            </div>
+          </div>
+          <div class="section-label">About</div>
+          <div class="row-list">
+            <button type="button" class="row-item" onclick="goToTerms()">
+              <span class="row-icon"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-file"/></svg></span>
+              <span class="row-label">Terms &amp; conditions</span>
+              <svg aria-hidden="true" class="row-chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-chevron-right"/></svg>
+            </button>
+          </div>
+          <p class="app-version">SchoolRide · prototype</p>
+        </div>
+
+        <div class="subview" id="sub-personal">
+          <div class="photo-block">
+            <span class="photo-big pic" data-pic="me" aria-hidden="true"><span class="pic-initials">SD</span></span>
+            <button type="button" class="link-btn" onclick="openPhotoSheet('me')">Change photo</button>
+          </div>
+          <form class="panel" id="personalForm" novalidate onsubmit="event.preventDefault(); savePersonal()">
+            <h2>Your information</h2>
+            <div class="hint">Your school and your co-guardian see your name and phone number.</div>
+            <div class="field"><label for="pfName">Full name</label><input id="pfName" type="text" autocomplete="name" value="Sarah Doe" aria-describedby="pfNameErr"><div class="field-error" id="pfNameErr"></div></div>
+            <div class="field"><label for="pfPhone">Phone</label><input id="pfPhone" type="tel" autocomplete="tel" value="+27 82 555 0142" aria-describedby="pfPhoneErr pfPhoneHint"><div class="field-error" id="pfPhoneErr"></div><div class="field-hint" id="pfPhoneHint">A new number is confirmed with a texted code.</div></div>
+            <div class="field"><label for="pfEmail">Email</label><input id="pfEmail" type="email" autocomplete="email" value="sarah.doe@email.com" aria-describedby="pfEmailErr"><div class="field-error" id="pfEmailErr"></div></div>
+            <button type="submit" class="btn-primary">Save changes</button>
+            <div class="saved-note" id="savedPersonal" role="status"></div>
+          </form>
+        </div>
+
+        <div class="subview" id="sub-family">
+          <div class="section-label">Children · linked by their schools</div>
+
+          <div class="child-card" id="child-jane">
+            <button type="button" class="child-card-head" aria-expanded="false" aria-controls="body-jane" onclick="toggleChild('jane')">
+              <span class="contact-avatar pic" data-pic="jane" aria-hidden="true"><span class="pic-initials">J</span></span>
+              <span class="child-card-info">
+                <span class="contact-name">Jane Doe</span>
+                <span class="contact-role">Riverside Primary · Grade 4</span>
+              </span>
+              <svg aria-hidden="true" class="child-chevron" id="chev-jane" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-chevron-right"/></svg>
+            </button>
+            <div class="child-card-body" id="body-jane" inert>
+              <div class="child-detail-row"><span>Route</span><span>Route 4 · Mr. Naidoo</span></div>
+              <div class="child-detail-row"><span>Pickup area</span><span>Oak Street</span></div>
+              <button type="button" class="link-btn" onclick="openPhotoSheet('jane')">Change Jane's photo</button>
+              <div class="child-detail-note">Linked by Riverside Primary. Contact the school to update route or pickup details.</div>
+            </div>
+          </div>
+
+          <div class="child-card" id="child-liam">
+            <button type="button" class="child-card-head" aria-expanded="false" aria-controls="body-liam" onclick="toggleChild('liam')">
+              <span class="contact-avatar muted pic" data-pic="liam" aria-hidden="true"><span class="pic-initials">L</span></span>
+              <span class="child-card-info">
+                <span class="contact-name">Liam Doe</span>
+                <span class="contact-role">Northgate Academy · Grade 2</span>
+              </span>
+              <svg aria-hidden="true" class="child-chevron" id="chev-liam" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-chevron-right"/></svg>
+            </button>
+            <div class="child-card-body" id="body-liam" inert>
+              <div class="child-detail-row"><span>Route</span><span>Route 1 · Ms. Dlamini</span></div>
+              <div class="child-detail-row"><span>Pickup area</span><span>Birch Close</span></div>
+              <button type="button" class="link-btn" onclick="openPhotoSheet('liam')">Change Liam's photo</button>
+              <div class="child-detail-note">Linked by Northgate Academy. Contact the school to update route or pickup details.</div>
+            </div>
+          </div>
+
+          <div class="row-list">
+            <button type="button" class="row-item" onclick="showToast('Contact your school to link an additional child')">
+              <span class="row-icon"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-icon-3"/></svg></span>
+              <span class="row-label">Add a child</span>
+            </button>
+          </div>
+
+          <div class="section-label">Guardians</div>
+          <div class="row-list">
+            <div class="person-row">
+              <span class="contact-avatar pic" data-pic="me" aria-hidden="true"><span class="pic-initials">SD</span></span>
+              <span class="person-info"><span class="contact-name js-name">Sarah Doe</span><span class="contact-role">You</span></span>
+            </div>
+            <div class="person-row">
+              <span class="contact-avatar muted" aria-hidden="true">TD</span>
+              <span class="person-info"><span class="contact-name">Thabo Doe</span><span class="contact-role">Co-guardian · linked by the school</span></span>
+            </div>
+          </div>
+
+          <div class="section-label">Trusted family friends</div>
+          <p class="section-hint">People you can share a ride's live ETA with in one tap. They see nothing unless you share, and only for that day. To collect a child, they also need the school's approval.</p>
+          <div class="row-list" id="friendList"></div>
+          <div class="row-list add-list">
+            <button type="button" class="row-item" onclick="openFriendSheet()">
+              <span class="row-icon"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-icon-3"/></svg></span>
+              <span class="row-label">Add a trusted friend</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="subview" id="sub-privacy">
+          <div class="panel">
+            <h2>Tracking services</h2>
+            <div class="hint">What SchoolRide tracks, and what you can switch off.</div>
+            <div class="status-row">
+              <span class="status-text"><span class="toggle-label">Bus location</span><span class="hint">Shared by your school during rides. It tracks the bus, never you.</span></span>
+              <span class="status-tag on">On</span>
+            </div>
+            <div class="status-row">
+              <span class="status-text"><span class="toggle-label">Your phone's location</span><span class="hint">Not used. Distances are measured from your home address.</span></span>
+              <span class="status-tag">Not used</span>
+            </div>
+            <button type="button" class="toggle-row" role="switch" aria-checked="false" id="prefAnalytics" aria-describedby="prefAnalyticsHint" onclick="toggleRowSwitch(this)">
+              <span class="status-text"><span class="toggle-label">Usage analytics</span><span class="hint" id="prefAnalyticsHint">Anonymous counts of which screens are used.</span></span>
+              <span class="switch"><span class="switch-knob"></span></span>
+            </button>
+            <button type="button" class="toggle-row" role="switch" aria-checked="false" id="prefCrash" aria-describedby="prefCrashHint" onclick="toggleRowSwitch(this)">
+              <span class="status-text"><span class="toggle-label">Crash reports</span><span class="hint" id="prefCrashHint">Technical details sent when the app crashes.</span></span>
+              <span class="switch"><span class="switch-knob"></span></span>
+            </button>
+          </div>
+          <div class="panel">
+            <h2>Your data</h2>
+            <div class="hint">Get a copy of what SchoolRide holds about you and your children: your profile, linked children, ride history and settings.</div>
+            <button type="button" class="btn-primary dark" id="dataRequestBtn" onclick="requestData()">Request my data</button>
+            <div class="saved-note" id="dataRequested" role="status"></div>
+          </div>
+          <div class="row-list">
+            <button type="button" class="row-item" onclick="goToTerms()">
+              <span class="row-icon"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-file"/></svg></span>
+              <span class="row-label">Terms &amp; conditions</span>
+              <svg aria-hidden="true" class="row-chevron" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-chevron-right"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="subview" id="sub-security">
+          <div class="panel">
+            <h2>Change password</h2>
+            <div class="hint">Use at least 8 characters, with a mix of letters and numbers.</div>
+            <div class="field"><label>Current password</label><input type="password" placeholder="••••••••"></div>
+            <div class="field"><label>New password</label><input type="password" placeholder="••••••••"></div>
+            <div class="field"><label>Confirm new password</label><input type="password" placeholder="••••••••"></div>
+            <button type="button" class="btn-primary" onclick="showSaved('pw')">Update password</button>
+            <div class="saved-note" id="savedPw">Password updated.</div>
+          </div>
+          <div class="panel">
+            <div class="toggle-row">
+              <div>
+                <div class="toggle-label" id="recoveryLabel">Recovery email</div>
+                <div class="hint" id="recoveryHint" style="margin-bottom:0;">Optional — lets you reset your password if you forget it.</div>
+              </div>
+              <button type="button" class="switch" id="recoverySwitch" role="switch" aria-checked="false" aria-labelledby="recoveryLabel" aria-describedby="recoveryHint" aria-controls="recoveryFields" onclick="toggleRecovery()"><span class="switch-knob"></span></button>
+            </div>
+            <div class="recovery-fields" id="recoveryFields" inert>
+              <div class="field"><label>Recovery email</label><input type="email" placeholder="you@example.com"></div>
+              <button type="button" class="btn-primary dark" onclick="showSaved('email')">Save recovery email</button>
+              <div class="saved-note" id="savedEmail">Recovery email saved.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="subview" id="sub-terms">
+          <article class="legal">
+            <p class="legal-meta">Last updated 3 November 2026</p>
+            <p class="legal-draft">Draft for the prototype. The final text comes from the school network's legal team before release.</p>
+            <h3>1. Who provides SchoolRide</h3>
+            <p>Your child's school licenses SchoolRide and runs its transport. We provide the app that shows you that transport.</p>
+            <h3>2. Who can use it</h3>
+            <p>Guardians the school has verified. The school links each guardian to their children; you can't link a child yourself.</p>
+            <h3>3. What you see</h3>
+            <p>Only your own children's rides: the bus's position, ETAs, pickups and drop-offs, and exam-day changes. Other children on a route appear only as a number of stops.</p>
+            <h3>4. Sharing</h3>
+            <p>You can share a ride's live ETA with your co-guardian or a trusted family friend. A share lasts for that day only. Collecting a child still needs the school's approval.</p>
+            <h3>5. Your data</h3>
+            <p>We keep your name, phone number, email, linked children, ride history and settings to run the service. We don't use your phone's location. You can request a copy of your data at any time under Account, Privacy.</p>
+            <h3>6. Times are estimates</h3>
+            <p>ETAs depend on traffic and the bus's signal. Always follow the school's instructions on the day.</p>
+            <h3>7. Changes</h3>
+            <p>If these terms change, we'll tell you in the app before the change takes effect.</p>
+          </article>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- NAV -->
+    <div class="navwrap">
+      <div class="radial" id="radial" inert>
+        <button type="button" class="radial-item r1" onclick="openSheet('call')"><span class="radial-label">Call</span><span class="radial-icon"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-phone"/></svg></span></button>
+        <button type="button" class="radial-item r2" onclick="closeFabThen(openRouteView)"><span class="radial-label">Full route</span><span class="radial-icon"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg></span></button>
+        <button type="button" class="radial-item r3" onclick="closeFabThen(function(){ switchTab('schedule'); })"><span class="radial-label">Exam day</span><span class="radial-icon"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-calendar"/></svg></span></button>
+        <button type="button" class="radial-item r4" onclick="openSheet('share')"><span class="radial-label">Share ETA</span><span class="radial-icon"><svg aria-hidden="true" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.5" x2="15.4" y2="6.5"/><line x1="8.6" y1="13.5" x2="15.4" y2="17.5"/></svg></span></button>
+      </div>
+
+      <button type="button" class="fab" id="fab" aria-label="Quick actions" aria-expanded="false" aria-controls="radial" onclick="toggleFab()">
+        <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><use href="#i-icon-3"/></svg>
+      </button>
+
+      <nav class="tabbar" id="tabbar" aria-label="Main">
+        <div class="tab-indicator" id="tabIndicator" aria-hidden="true"></div>
+        <button type="button" class="tab active" id="navtab-track" aria-current="page" onclick="switchTab('track')">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-pin"/></svg>
+          <span>Track</span>
+        </button>
+        <button type="button" class="tab" id="navtab-schedule" onclick="switchTab('schedule')">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-calendar"/></svg>
+          <span>Schedule</span>
+        </button>
+        <button type="button" class="tab" id="navtab-history" onclick="switchTab('history')">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <span>History</span>
+        </button>
+      </nav>
+
+    </div>
+
+    <!-- FULL-SCREEN LAYERS: FAB veil, sheets and toast sit outside .navwrap so they cover the whole screen -->
+    <div class="scrim" id="scrim" onclick="toggleFab()"></div>
+
+      <!-- CALL SPEED-DIAL SHEET -->
+      <div class="sheet-scrim" id="callScrim" onclick="closeSheet('call')"></div>
+      <div class="bottom-sheet" id="callSheet" inert>
+        <div class="sheet-handle"></div>
+        <div class="sheet-header"><h3>Call</h3><button type="button" class="sheet-close" aria-label="Close" onclick="closeSheet('call')">✕</button></div>
+        <div id="callSheetBody"></div>
+      </div>
+
+      <!-- SHARE ETA SHEET -->
+      <div class="sheet-scrim" id="shareScrim" onclick="closeSheet('share')"></div>
+      <div class="bottom-sheet" id="shareSheet" inert>
+        <div class="sheet-handle"></div>
+        <div class="sheet-header"><h3>Share live ETA</h3><button type="button" class="sheet-close" aria-label="Close" onclick="closeSheet('share')">✕</button></div>
+        <div id="shareList"></div>
+        <div class="sheet-hint">They'll see today's live tracking for <span class="share-name">Jane</span> — nothing is shared beyond today.</div>
+      </div>
+
+      <!-- PROFILE PHOTO SHEET -->
+      <div class="sheet-scrim" id="photoScrim" onclick="closeSheet('photo')"></div>
+      <div class="bottom-sheet" id="photoSheet" inert>
+        <div class="sheet-handle"></div>
+        <div class="sheet-header"><h3 id="photoTitle">Profile photo</h3><button type="button" class="sheet-close" aria-label="Close" onclick="closeSheet('photo')">✕</button></div>
+        <div class="photo-preview"><span class="photo-big pic" id="photoPreview" aria-hidden="true"><span class="pic-initials">SD</span></span></div>
+        <div class="row-list">
+          <button type="button" class="row-item" onclick="pickPhoto('camera')">
+            <span class="row-icon"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-camera"/></svg></span>
+            <span class="row-label">Take a photo</span>
+          </button>
+          <button type="button" class="row-item" onclick="pickPhoto('library')">
+            <span class="row-icon"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-image"/></svg></span>
+            <span class="row-label">Choose from library</span>
+          </button>
+          <button type="button" class="row-item" id="memojiRow" hidden onclick="pickPhoto('memoji')">
+            <span class="row-icon"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-smile"/></svg></span>
+            <span class="row-text"><span class="row-label">Use a Memoji</span><span class="row-sub">Pick one you've saved to Photos</span></span>
+          </button>
+          <button type="button" class="row-item" id="photoRemoveRow" hidden onclick="removePhoto()">
+            <span class="row-icon"><svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><use href="#i-x"/></svg></span>
+            <span class="row-label">Remove photo, use initials</span>
+          </button>
+        </div>
+        <input type="file" id="photoInput" accept="image/*" hidden onchange="photoChosen(this)">
+      </div>
+
+      <!-- ADD TRUSTED FRIEND SHEET -->
+      <div class="sheet-scrim" id="friendScrim" onclick="closeSheet('friend')"></div>
+      <div class="bottom-sheet" id="friendSheet" inert>
+        <div class="sheet-handle"></div>
+        <div class="sheet-header"><h3>Add a trusted friend</h3><button type="button" class="sheet-close" aria-label="Close" onclick="closeSheet('friend')">✕</button></div>
+        <form id="friendForm" novalidate onsubmit="event.preventDefault(); addFriend()">
+          <div class="field"><label for="frName">Name</label><input id="frName" type="text" autocomplete="off" aria-describedby="frNameErr"><div class="field-error" id="frNameErr"></div></div>
+          <div class="field"><label for="frPhone">Phone</label><input id="frPhone" type="tel" autocomplete="off" aria-describedby="frPhoneErr"><div class="field-error" id="frPhoneErr"></div></div>
+          <div class="field">
+            <span class="field-label" id="frRelLabel">Relationship</span>
+            <div class="chip-group" role="radiogroup" aria-labelledby="frRelLabel" id="frRel"></div>
+          </div>
+          <button type="submit" class="btn-primary">Add friend</button>
+        </form>
+        <div class="sheet-hint">We'll text them that you've added them. They see a ride only when you share it.</div>
+      </div>
+
+      <div class="toast" id="toast" role="status"></div>
+
+    <!-- FULL ROUTE VIEW -->
+    <div class="route-overlay" id="routeOverlay" inert>
+      <div class="topnav">
+        <button type="button" class="back-btn" style="visibility:visible;" aria-label="Back" onclick="closeRouteView()">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <h1 id="routeTitle">Jane's route</h1>
+      </div>
+
+      <div class="route-map" id="routeMap"></div>
+      <div class="route-zoom">
+        <button type="button" aria-label="Zoom in" onclick="routeZoom(1.15)">+</button>
+        <button type="button" aria-label="Zoom out" onclick="routeZoom(0.87)">–</button>
+      </div>
+
+      <div class="route-carousel-wrap">
+        <div class="route-carousel" id="routeCarousel">
+          <div class="route-card">
+            <div class="route-card-top">
+              <div class="contact-avatar">J</div>
+              <div><div class="route-card-name">Jane Doe</div><div class="route-card-school">Riverside Primary</div></div>
+            </div>
+            <div class="route-card-status">On the way · 12 min</div>
+            <div class="route-track"><div class="route-track-fill" style="width:52%;"></div></div>
+          </div>
+          <div class="route-card">
+            <div class="route-card-top">
+              <div class="contact-avatar muted">L</div>
+              <div><div class="route-card-name">Liam Doe</div><div class="route-card-school">Northgate Academy</div></div>
+            </div>
+            <div class="route-card-status">On the way · 6 min</div>
+            <div class="route-track"><div class="route-track-fill" style="width:78%;"></div></div>
+          </div>
+        </div>
+        <div class="route-dots" id="routeDots">
+          <span class="dot active"></span><span class="dot"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOTIFICATIONS -->
+    <div class="route-overlay" id="notifOverlay" inert>
+      <div class="topnav">
+        <button type="button" class="back-btn" style="visibility:visible;" aria-label="Back" onclick="closeNotifications()">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <h1>Notifications</h1>
+      </div>
+
+      <div class="notif-content">
+        <div class="notif-toprow"><button type="button" class="notif-markread" onclick="markAllRead()">Mark all read</button></div>
+        <div id="notifList"></div>
+
+        <div class="panel" style="margin-top:16px;">
+          <h2>Notification preferences</h2>
+          <button type="button" class="toggle-row" role="switch" aria-checked="true" onclick="toggleRowSwitch(this)">
+            <span class="toggle-label">Pickup &amp; drop-off updates</span>
+            <span class="switch on"><span class="switch-knob"></span></span>
+          </button>
+          <button type="button" class="toggle-row" role="switch" aria-checked="true" onclick="toggleRowSwitch(this)">
+            <span class="toggle-label">Exam-day changes</span>
+            <span class="switch on"><span class="switch-knob"></span></span>
+          </button>
+          <button type="button" class="toggle-row" role="switch" aria-checked="true" onclick="toggleRowSwitch(this)">
+            <span class="toggle-label">Route or driver changes</span>
+            <span class="switch on"><span class="switch-knob"></span></span>
+          </button>
+          <button type="button" class="toggle-row" role="switch" aria-checked="false" onclick="toggleRowSwitch(this)">
+            <span class="toggle-label">Shared ETA activity</span>
+            <span class="switch"><span class="switch-knob"></span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

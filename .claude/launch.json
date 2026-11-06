@@ -1,0 +1,20 @@
+{
+  // Used by the Claude desktop app's Browser pane to preview the app.
+  // Python's built-in server needs no installs (python3 ships with Ubuntu).
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "schoolride",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "http.server", "5173", "--bind", "127.0.0.1", "--directory", "app"],
+      "port": 5173
+    },
+    {
+      // React Native port (mobile/) on Expo web. Expo SDK 58 needs Node 22.13+, so this uses nvm's Node 24.
+      "name": "mobile-web",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["-c", "export NVM_DIR=\"$HOME/.config/nvm\"; . \"$NVM_DIR/nvm.sh\"; cd mobile && nvm use >/dev/null && BROWSER=none npx expo start --web --port 8081"],
+      "port": 8081
+    }
+  ]
+}

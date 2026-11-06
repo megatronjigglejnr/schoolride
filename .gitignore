@@ -1,0 +1,10 @@
+node_modules/
+test-results/
+.DS_Store
+*.log
+
+# Expo web build for the measured checks (npm run build:mobile-web)
+mobile/dist-web/
+# Local agent session state
+.anchor/
+.claude/settings.local.json

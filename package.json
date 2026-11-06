@@ -1,0 +1,16 @@
+{
+  "name": "schoolride",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SchoolRide parent app: HTML/CSS/JS prototype (source of truth for UX before the React Native port).",
+  "scripts": {
+    "start": "npx --yes serve app -l 5173",
+    "test": "node --test --test-concurrency=1 tests/*.test.js",
+    "setup": "npm install && npx playwright install chromium",
+    "build:mobile-web": "cd mobile && bash -c 'unset npm_config_prefix; . \"$HOME/.config/nvm/nvm.sh\" && nvm use >/dev/null && npx expo export --platform web --output-dir dist-web'",
+    "test:mobile-web": "node --test --test-concurrency=1 tests/mobile/*.test.js"
+  },
+  "devDependencies": {
+    "playwright": "~1.61.0"
+  }
+}

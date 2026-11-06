@@ -1,0 +1,33 @@
+SchoolRide - notes for later
+============================
+
+THE BUS IS THE BRAND MARK
+-------------------------
+Decided (Nov 2026): the flat bus from the Track screen is SchoolRide's mark. Use the same drawing
+everywhere, so the app reads as one thing from the home screen to the live ride.
+
+Where it is used now
+- Start-up animation: the bus sits on the marigold field (the native splash shows the same frame), the
+  "SchoolRide" wordmark rises in, the engine starts (a shiver and exhaust puffs), the bus rocks back nose-up,
+  then speeds off to the right with a big puff and speed lines, and the field fades into the first screen (~2.1s).
+  Prototype: .intro in app/styles.css and startUp() in app/app.js.
+  App: mobile/src/components/Intro.tsx.
+- Native splash image: mobile/assets/images/splash-bus.png (rendered from the #bus sprite at 3x,
+  528 x 240, transparent), on marigold #F5B82E, 176pt wide (mobile/app.json, expo-splash-screen).
+- Track: the bus rides the white sheet's top edge, and a small one moves along the mini-map.
+- Onboarding welcome screen: the bus above the wordmark.
+
+Still to do: the app icon (future)
+- Make the app icon from the same bus: aubergine #3A1F3D body, ice #EEF1F5 windows, on a marigold
+  #F5B82E field (the light-to-deep gradient, or flat marigold if the gradient muddies at small sizes).
+- The current icons in mobile/assets/images (icon.png, the android-icon-* files and expo.icon) are
+  still the Expo template's; replace all of them.
+- iOS: 1024 x 1024, no transparency, the bus centred with generous margin (the system rounds the corners).
+- Android adaptive icon: the bus as the foreground layer inside the 66% safe zone, marigold as the
+  background layer, and a one-colour monochrome version (bus silhouette) for themed icons.
+- Check it at 29 / 40 / 60 pt: the windows must stay visible; simplify the wheels if they blur.
+- Source of truth for the shapes: the <symbol id="bus"> in app/index.html (132 x 60 view box).
+
+Maybe later: a short promo video
+- If a promo or store-preview video is ever made, open on the same bus drive-off as the start-up
+  animation, so the ad and the app feel continuous.
